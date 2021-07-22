@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Blank HTML5</title>
+	
+	<style>
+					.myToggle {
+				visibility: visible;
+				width: 300px;
+				height: 30px;
+				background-color: transparent;
+				 position:absolute;
+				/*border-radius: 5px;*/
+			}
+
+			.sliderLine {
+			  width: 300px;
+			  height: 30px;
+			  background-color: gray;
+			  position:absolute;
+			  border-radius: 30px;
+			  box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+			}
+
+			/* .myToggle:hover {
+
+				background-color: rgb(0,0,0);
+			} */
+
+			.btn {
+				border-radius: 30px;
+				position:relative;
+				float:left;
+				width: 30px;
+				height: 30px;
+				background-color: transparent;
+				opacity : 1;
+			}
+
+			.btnSmall {
+				border-radius: 10px;
+				position:absolute;
+				left : 10px;
+				top : 10px;
+				width: 10px;
+				height: 10px;
+				background-color: white;
+				pointer-events:none; 
+				transition: 0.5s ease-in-out;
+			}
+
+			.btn:hover > .btnSmall {
+			  /* animation-name: bounce;
+			  animation-duration: 3s; */
+			  /* background-color: white !important; */
+			  /* animation-timing-function: ease-out; */
+			  transform: scale(3);
+			}
+
+			.btnToggle {
+				border-radius: 30px;
+				position:relative;
+				/* float:left; */
+				width: 30px;
+				height: 30px;
+				background-color: blue;
+				transition: 0.5s ease;
+			}
+
+
+			@keyframes bounce {
+				0%, 100%{
+					-webkit-transform: scale(1);
+					-ms-transform:   scale(1);
+					transform:       scale(1);
+				}
+				30% {
+					-webkit-transform: scale(2);
+					-ms-transform:     scale(2);
+					transform:         scale(2);
+				}
+
+			}
+	</style>
+	
+    </head>
+    <body>
+
+        <div id="mainToggle" class="myToggle"> 
+		   <div class="sliderLine" >
+		   </div>
+		</div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script>
+		
+				var colors = [ 
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16),
+						"#" + Math.floor(Math.random()*16777215).toString(16)
+						];
+		
+		$(document).ready(function() {
+		   
+				var element = document.getElementById("mainToggle");
+			   
+			   for (let i = 0; i < 10; i++) {
+
+					var smalldiv = document.createElement("div");
+				 smalldiv.classList.add("btnSmall");
+				 smalldiv.style["background-color"] = colors[i];
+
+				 var div = document.createElement("div");
+				 div.classList.add("btn");
+				 div.appendChild(smalldiv);
+				 
+				 div.addEventListener("click", myFunction);
+				 element.appendChild(div);
+				}
+			   
+			   var div = document.createElement("div");
+			  div.classList.add("btnToggle");
+			  div.id = "toggleSlider";
+			  div.style.left = "0px";
+			  div.style["background-color"] = colors[0];
+			  element.appendChild(div);
+
+		   
+		});
+		
+
+
+		function myFunction(event) {
+		  var rect = event.target;
+		  //alert (rect.style.top + " " + rect.style.left);
+		  //alert (rect.offsetLeft);
+		  
+		  //alert (rect.offsetLeft/30);
+		  
+		  var slider = document.getElementById("toggleSlider");
+		  slider.style.left = rect.offsetLeft + "px";
+		  slider.style["background-color"] = colors[rect.offsetLeft/30 || 0];
+		  //alert (slider);
+		}
+		
+		
+		</script>
+    </body>
+</html>
