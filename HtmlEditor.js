@@ -21,19 +21,34 @@ class HtmlEditor {
 		this.tools.style.float = "left";
 		this.tools.style.border = "1px solid black";
 		
+		this.elementSelect = document.createElement("select")
+		this.elementSelect.style.width = "auto";
+		this.elementSelect.style.height = "auto";
+		this.elementSelect.options.add( new Option('Div','div') );
+		this.elementSelect.options.add( new Option('Span','span') );
+		this.elementSelect.options.add( new Option('Button','button') );
+		this.tools.append(this.elementSelect);
+		
 		var btn = document.createElement("button")
 		btn.style.width = "auto";
 		btn.style.height = "auto";
-		btn.textContent = 'DIV';
-		btn.onclick = this.tool1Click.bind(this);
+		btn.textContent = 'Add';
+		btn.onclick = this.addElementClick.bind(this);
 		this.tools.append(btn);
 		
-		btn = document.createElement("button");
+		btn = document.createElement("button")
 		btn.style.width = "auto";
 		btn.style.height = "auto";
-		btn.textContent = 'DIV';
-		btn.onclick = this.tool2Click.bind(this);
+		btn.textContent = 'Remove';
+		btn.onclick = this.removeElementClick.bind(this);
 		this.tools.append(btn);
+		
+		//btn = document.createElement("button");
+		//btn.style.width = "auto";
+		//btn.style.height = "auto";
+		//btn.textContent = 'DIV';
+		//btn.onclick = this.tool2Click.bind(this);
+		//this.tools.append(btn);
 		
 		btn = document.createElement("button");
 		btn.style.width = "auto";
@@ -65,6 +80,25 @@ class HtmlEditor {
 		console.log(event.target);
 	}
 	
+	addElementClick(event)
+	{
+		var elem = this.elementSelect.options[this.elementSelect.selectedIndex].text;
+		var item = document.createElement(elem);
+		item.style.width = "50px";
+		item.style.height = "50px";
+		item.style.border = "3px solid blue";
+		
+		this.currentElement = item;
+		
+		this.editor.append(item);
+		console.log("addElementClick");
+	}
+	
+	removeElementClick(event)
+	{
+		this.currentElement.remove();
+	}
+	
 	tool1Click(event)
 	{
 		var item = document.createElement("div");
@@ -94,6 +128,7 @@ class HtmlEditor {
 	tool3Click(event)
 	{
 		this.currentElement.style["background-color"] = "red";
+		this.currentElement.style["border-radius"] = "10px";
 	}
 	
 	selectToolClick(event)
