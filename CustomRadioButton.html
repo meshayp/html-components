@@ -1,0 +1,44 @@
+<input type="radio"  class="mydiv" id="html1" name="fav_language" >
+<input type="radio"  class="mydiv" id="html2" name="fav_language" >
+<input type="radio"  class="mydiv" id="html3" name="fav_language" >
+<input type="radio"  class="mydiv" id="html4" name="fav_language" >
+<input type="radio"  class="mydiv" id="html5" name="fav_language" >
+<input type="radio"  class="mydiv" id="html6" name="fav_language" >
+<input type="radio"  class="mydiv" id="html7" name="fav_language" >
+<input type="radio"  class="mydiv" id="html8" name="fav_language" >
+
+
+.mydiv {
+  width : 50px;
+  height : 50px;
+  background-color : green;
+  transition : 3s ease-out;
+  display: block;
+  position : relative;
+}
+
+.mydiv:after {
+  content : "";
+  background-color : blue;
+  position : absolute;
+  top : 0;
+  left : 0;
+  height: 100%;
+  width: 100%;
+  opacity : 1;
+}
+
+.mydiv:hover::after {
+  background-color : green;
+
+}
+
+.mydiv:hover {
+
+  width : 300px;
+  transition : 0.1s ease-out;
+}
+
+.mydiv:checked::after {
+  background-color : yellow;
+}
