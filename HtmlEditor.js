@@ -16,7 +16,7 @@ class HtmlEditor {
 		this.editor.onclick = this.editorClick.bind(this);
 		
 		this.tools = document.createElement("div");
-		this.tools.style.width = "100px";
+		this.tools.style.width = "300px";
 		this.tools.style.height = "300px";
 		this.tools.style.float = "left";
 		this.tools.style.border = "1px solid black";
@@ -64,9 +64,71 @@ class HtmlEditor {
 		btn.onclick = this.selectToolClick.bind(this);
 		this.tools.append(btn);
 		
+		
+		btn = document.createElement("button");
+		btn.style.width = "auto";
+		btn.style.height = "auto";
+		btn.textContent = 'Float';
+		btn.onclick = this.floatToolClick.bind(this);
+		this.tools.append(btn);
+		
+		this.elementFloat = document.createElement("select")
+		this.elementFloat.style.width = "auto";
+		this.elementFloat.style.height = "auto";
+		this.elementFloat.options.add( new Option('Left','left') );
+		this.elementFloat.options.add( new Option('Right','right') );
+		this.tools.append(this.elementFloat);
+		
+		this.toolsArr = [];
+		
+		var tool = new ToolSelect();
+		tool.init(this, 
+			{
+				name : "Float",
+				style : "float",
+				select : [ {name : "Left", value : "left"}, {name : "Right", value : "right"} ]
+			})
+		this.tools.append(tool.getHtmlDom());
+		this.toolsArr.push(tool);
+		
+		tool = new ToolValue();
+		tool.init(this, 
+			{
+				name : "width",
+				style : "width",
+				type : "number",
+				units : "px"
+			})
+		this.tools.append(tool.getHtmlDom());
+		this.toolsArr.push(tool);
+		
+		tool = new ToolValue();
+		tool.init(this, 
+			{
+				name : "height",
+				style : "height",
+				type : "number",
+				units : "px"
+			})
+		this.tools.append(tool.getHtmlDom());
+		this.toolsArr.push(tool);
+		
+		tool = new ToolValue();
+		tool.init(this, 
+			{
+				name : "background color",
+				style : "backgroundColor",
+				type : "color",
+				units : "",
+				element : { height : "17px" }
+			})
+		this.tools.append(tool.getHtmlDom());
+		//this.toolsArr.push(tool);
+		
 		this.mainElement.append(this.tools);
 		this.mainElement.append(this.editor);
 		
+		this.currentElement = this.editor;
 	}
 	
 	editorClick(event)
@@ -76,6 +138,8 @@ class HtmlEditor {
 			this.currentElement = event.target;
 			this.selectMode = false;
 			this.toggleSelectHover(this.editor.children); 
+			
+			this.toolsArr.forEach(item => item.setValueFromSelected());
 		}
 		console.log(event.target);
 	}
@@ -88,9 +152,10 @@ class HtmlEditor {
 		item.style.height = "50px";
 		item.style.border = "3px solid blue";
 		
+		this.currentElement.append(item);
+		
 		this.currentElement = item;
 		
-		this.editor.append(item);
 		console.log("addElementClick");
 	}
 	
@@ -137,6 +202,11 @@ class HtmlEditor {
 		this.selectMode = true;
 	}
 	
+	floatToolClick(event)
+	{
+		this.currentElement.style["float"] = this.elementFloat.options[this.elementFloat.selectedIndex].text;
+	}
+	
 	toggleSelectHover(childs)
 	{
 		[...childs].forEach(item => {
@@ -145,5 +215,109 @@ class HtmlEditor {
 			this.toggleSelectHover(item.children);
 			
 		} );
+	}
+}
+
+
+class ToolSelect
+{
+	constructor() {  }
+	
+	init(editor, data)
+	{
+		this.editor = editor;
+		this.data = data;
+	}
+	
+	getHtmlDom()
+	{		
+		var div = document.createElement("div");
+		div.style.width = "auto";
+		div.style["min-width"] = "300px";
+		div.style.float = "left";
+		
+		var btn = document.createElement("button");
+		btn.style.width = "auto";
+		btn.style.height = "auto";
+		btn.style.float = "left";
+		btn.textContent = this.data.name;
+		btn.onclick = this.toolClick.bind(this);
+		div.append(btn);
+		
+		this.elementSelect = document.createElement("select")
+		this.elementSelect.style.width = "auto";
+		this.elementSelect.style.height = this.data?.element?.height ?? "auto";
+		this.elementSelect.style.float = "left";
+		this.data.select.forEach(item => this.elementSelect.options.add( new Option(item.name, item.value) ) );
+		div.append(this.elementSelect);
+		
+		return div;
+	}
+	
+	toolClick()
+	{
+		this.editor.currentElement.style[this.data.style] = this.elementSelect[this.elementSelect.selectedIndex].text;
+	}
+	
+	setValueFromSelected()
+	{
+	}
+}
+
+
+class ToolValue
+{
+	constructor() {  }
+	
+	init(editor, data)
+	{
+		this.editor = editor;
+		this.data = data;
+	}
+	
+	getHtmlDom()
+	{		
+		
+	
+		var div = document.createElement("div");
+		div.style.width = "auto";
+		div.style["min-width"] = "300px";
+		div.style.float = "left";
+		
+		var btn = document.createElement("button");
+		btn.style.width = "auto";
+		btn.style.height = "auto";
+		btn.style.float = "left";
+		btn.textContent = this.data.name;
+		btn.onclick = this.toolClick.bind(this);
+		div.append(btn);
+		
+		this.elementInput = document.createElement("input")
+		this.elementInput.style.width = "auto";
+		this.elementInput.style.height = this.data?.element?.height ?? "auto";
+		this.elementInput.type = this.data.type;
+		this.elementInput.style["max-width"] = "150px";
+		this.elementInput.style["min-width"] = "50px";
+		this.elementInput.style["max-height"] = "50px";
+		this.elementInput.style["min-height"] = "17px";
+		this.elementInput.style.float = "left";
+		div.append(this.elementInput);
+		
+		return div;
+	}
+	
+	toolClick()
+	{
+		this.editor.currentElement.style[this.data.style] = this.elementInput.value + this.data.units;
+	}
+	
+	setValueFromSelected()
+	{
+		var val = this.editor.currentElement.style[this.data.style]?.toString().replaceAll(this.data.units, "");
+		if (val != "")
+		{
+			this.elementInput.value = val;
+			console.log("set value = " + val);
+		}
 	}
 }
