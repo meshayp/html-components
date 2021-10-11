@@ -1,0 +1,67 @@
+.ballcontainer {
+    height: 100px;
+    width: 300px;
+    background-color: gray;
+	position : relative;
+	overflow : hidden;
+}
+
+.bar1 {
+	top : 0px;
+	left : 0px;
+	height: 100px;
+    width: 50px;
+    background-color: blue;
+	position : absolute;
+	animation : move 1s linear infinite;
+}
+
+.bar2 {
+	top : 50px;
+	left : 50px;
+	height: 50px;
+    width: 50px;
+    background-color: blue;
+	position : absolute;
+	animation : move 1s linear infinite;
+}
+
+.bar3 {
+	top : 100px;
+	left : 100px;
+	height: 0px;
+    width: 50px;
+    background-color: blue;
+	position : absolute;
+	animation : move 1s linear infinite;
+}
+
+.bar4 {
+	top : -50px;
+	left : -50px;
+	height: 150px;
+    width: 50px;
+    background-color: blue;
+	position : absolute;
+	animation : move 1s linear infinite;
+}
+
+.ball {
+	top : 75px;
+	left : 120px;
+	height: 25px;
+    width: 25px;
+    background-color: red;
+	position : absolute;
+	border-radius : 50% 50%;
+	animation : jump 0.5s ease-out alternate infinite;
+}
+
+@keyframes move {
+	to {  transform : translatex(50px) translatey(50px); }
+}
+
+@keyframes jump {
+	
+	to {  transform : translatey(-50px); }
+}
