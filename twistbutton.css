@@ -1,0 +1,64 @@
+.btnmaster {
+	top : 200px;
+	left : 200px;
+	height : 100px;
+	width : 100px;
+	--background-color : red;
+	position : relative;
+}
+
+.btncontainer {
+	height : 100px;
+	width : 100px;
+	--background-color : yellow;
+	transition : 0.5s ;
+	position : absolute;
+	opacity : 0;
+	mix-blend-mode: overlay;
+}
+
+.btnback {
+	height : 100px;
+	width : 100px;
+	background-color : red;
+	transition : 0.5s  ;
+	position : absolute;
+}
+
+.btninner {
+	width : 50%;
+	height : 50%;
+	background-color : blue;
+	float: left;
+	border-color : pink;
+	border-radius : 20%;
+	--opacity : 0;
+	position : relative;
+	
+}
+
+.btninnercontent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  --transform-origin : 0 0;
+  transition : 0.5s;
+  --background-color : yellow;
+}
+
+.btnmaster:hover .btnback {
+	transform : rotate(45deg) scale(1.5);
+	opacity : 0;
+}
+
+.btnmaster:hover .btncontainer {
+	transform : rotate(45deg) scale(1.5);
+	opacity : 1;
+}
+
+.btnmaster:hover .btncontainer .btninner .btninnercontent {
+	transform : rotate(-45deg);
+	transition : 2s;
+}
+
