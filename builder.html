@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+.attrib {
+    background-color : lightblue;
+}
+
+.attrib-options {
+     height: 0px;
+	 overflow : hidden;
+}
+
+.mainElement:hover {
+    background-color : black;
+}
+
+</style>
+
+<body >
+
+
+
+<div>
+    <div onclick="setElement('element')">Element</div>
+	<div onclick="setElement('hover')">Hover</div>
+</div>
+
+
+<div style="width:500px; height:100px; float:left; overflow:both;">
+<div class="attrib" onclick="toggle(this, 100)">color</div>
+<div class="attrib-options">
+        <div style="width:100px; height:100px; background-color:red; float:left;" onclick="setAttrib('background-color' ,'red')" ></div>
+		<div style="width:100px; height:100px; background-color:black; float:left;" onclick="setAttrib('background-color' ,'black')" ></div>
+		<div style="width:100px; height:100px; background-color:yellow; float:left;" onclick="setAttrib('background-color' ,'yellow')" ></div>
+		<div style="width:100px; height:100px; background-color:blue; float:left;" onclick="setAttrib('background-color' ,'blue')" ></div>
+</div>
+<div class="attrib" onclick="toggle(this, 100)">width</div>
+<div class="attrib-options">
+    <div onclick="setAttrib('width' ,'100%')" >100%</div>
+	<div onclick="setAttrib('width' ,'75%')" >75%</div>
+	<div onclick="setAttrib('width' ,'50%')" >50%</div>
+	<div onclick="setAttrib('width' ,'25%')" >25%</div>
+	<div onclick="setAttrib('width' ,'0%')" >0%</div>
+	<div onclick="setAttrib('width' ,'100px')" >100px</div>
+	<div onclick="setAttrib('width' ,'50px')" >50px</div>
+	<div onclick="setAttrib('width' ,'10px')" >10px</div>
+</div>
+<div class="attrib" onclick="toggle(this, 100)">height</div>
+<div class="attrib-options">
+    <div onclick="setAttrib('height' ,'100%')" >100%</div>
+	<div onclick="setAttrib('height' ,'75%')" >75%</div>
+	<div onclick="setAttrib('height' ,'50%')" >50%</div>
+	<div onclick="setAttrib('height' ,'25%')" >25%</div>
+	<div onclick="setAttrib('height' ,'0%')" >0%</div>
+	<div onclick="setAttrib('height' ,'100px')" >100px</div>
+	<div onclick="setAttrib('height' ,'50px')" >50px</div>
+	<div onclick="setAttrib('height' ,'10px')" >10px</div>
+</div>
+<div class="attrib" onclick="toggle(this, 100)">border-color</div>
+<div class="attrib-options">
+        <div style="width:100px; height:100px; background-color:red; float:left;" onclick="setAttrib('border-color' ,'red')" ></div>
+		<div style="width:100px; height:100px; background-color:black; float:left;" onclick="setAttrib('border-color' ,'black')" ></div>
+		<div style="width:100px; height:100px; background-color:yellow; float:left;" onclick="setAttrib('border-color' ,'yellow')" ></div>
+		<div style="width:100px; height:100px; background-color:blue; float:left;" onclick="setAttrib('border-color' ,'blue')" ></div>
+</div>
+
+<div class="attrib" onclick="toggle(this, 100)">border-width</div>
+<div class="attrib-options">
+    <div onclick="setAttrib('border-width' ,'1px')" >1px</div>
+	<div onclick="setAttrib('border-width' ,'2px')" >2px</div>
+	<div onclick="setAttrib('border-width' ,'10px')" >10px</div>
+</div>
+
+<div class="attrib" onclick="toggle(this, 400)">border-style</div>
+<div class="attrib-options">
+	<div onclick="setAttrib('border-style' ,'none')" >none</div>
+	<div onclick="setAttrib('border-style' ,'hidden')" >hidden</div>
+	<div onclick="setAttrib('border-style' ,'dotted')" >dotted</div>
+	<div onclick="setAttrib('border-style' ,'dashed')" >dashed</div>
+	<div onclick="setAttrib('border-style' ,'solid')" >solid</div>
+	<div onclick="setAttrib('border-style' ,'double')" >double</div>
+	<div onclick="setAttrib('border-style' ,'groove')" >groove</div>
+	<div onclick="setAttrib('border-style' ,'ridge')" >ridge</div>
+	<div onclick="setAttrib('border-style' ,'inset')" >inset</div>
+	<div onclick="setAttrib('border-style' ,'outset')" >outset</div>
+	<div onclick="setAttrib('border-style' ,'initial')" >initial</div>
+	<div onclick="setAttrib('border-style' ,'inherit')" >inherit</div>
+		
+</div>
+
+<div class="attrib" onclick="toggle(this, 400)">transition-duration</div>
+<div class="attrib-options">
+	<div onclick="setAttrib('transition-duration' ,'0s')" >0s</div>
+	<div onclick="setAttrib('transition-duration' ,'1s')" >1s</div>
+	<div onclick="setAttrib('transition-duration' ,'2s')" >2s</div>
+	<div onclick="setAttrib('transition-duration' ,'3s')" >3s</div>
+	<div onclick="setAttrib('transition-duration' ,'4s')" >4s</div>
+</div>
+
+</div>
+
+
+<!-- <div  style="width:500px; height:500px; border: 1px solid black;float:left">
+	<div id="element" class="mainElement" style="width:100px; height:100px;"></div>
+</div> -->
+
+<iframe id='frame' style="width:500px; height:500px; margin:0px; padding:0px; border: 1px solid black;float:left"> </iframe>
+
+<div id="workHTML"></div>
+
+<script>
+
+
+var elementSetter = { 
+			setAttrib(attrib , value)
+			{
+				//var element = document.getElementById("element");
+				//element.style[attrib] = value;
+				workingElement.style[attrib] = value;
+			}
+ }
+var hoverSetter =  { 
+            setAttrib(attrib , value)
+			{
+				hoverElement.style[attrib] = value;
+				//document.styleSheets[0].deleteRule(2);
+				//document.styleSheets[0].insertRule('.mainElement:hover { ' + hoverElement.style.cssText + '}', 2);
+			}
+ }
+var currentSetter = elementSetter;
+var hoverElement = document.createElement('div');
+var workingElement = document.createElement('div');
+
+
+function toggle(e, h)
+{
+	console.log(e);
+	console.log(h);
+
+    if (e.nextElementSibling.style.height == '0px' || e.nextElementSibling.style.height == '')
+	{
+	    e.nextElementSibling.style.height = "auto";
+	}
+	else
+	{
+	    e.nextElementSibling.style.height = "0px";
+	}
+}
+
+function setAttrib(attrib , value)
+{
+	currentSetter.setAttrib(attrib , value);
+	
+	var frameelement = document.getElementById("frame");
+	frameelement.srcdoc="<html><style>.elem:hover{ "+ hoverElement.style.cssText +" } .elem { "+workingElement.style.cssText+" } </style> <body>  <div style='width:500px; height:500px'> <div class='elem'> </div> </div> </body></html>";
+	
+	var workHTML = document.getElementById("workHTML");
+	workHTML.textContent  = frameelement.srcdoc.toString();
+}
+
+function setElement(setType)
+{
+	var frameelement = document.getElementById("frame");
+
+    if (setType == "element")
+	{
+	    currentSetter = elementSetter;
+		//frameelement.src =  "<div style='background-color:red;width:50px;height:50px'>";
+	}
+	
+	if (setType == "hover")
+	{
+	    currentSetter = hoverSetter;
+		//frameelement.srcdoc="<html><style>.elem:hover{ background-color : red } .elem { background-color : black; width : 100px; height:100px; } </style> <body> <div class='elem'> </div> </body></html>";
+	}
+	
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<input id="btn" type="button" onclick="incrementValue()" value="0" style=" position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%; background-color:Red; font-size : 140px; color:white;" />
+
+<script>
+var number = 0;
+
+function incrementValue()
+{
+    number++;
+    document.getElementById('btn').value = number;
+}
+   
+</script>
